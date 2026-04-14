@@ -23,10 +23,10 @@ export default function VideoCard({ video }: VideoCardProps) {
 
   return (
     <>
-      <Card className="group h-full border-white/5 bg-[#1e1e1e] pt-0 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 hover:border-helium-pink/20 hover:shadow-2xl hover:shadow-helium-pink/5">
+      <Card className="group flex h-full flex-col border-white/5 bg-[#1e1e1e] pt-0 transition-all duration-500 hover:scale-[1.01] hover:-translate-y-1 hover:border-helium-pink/20 hover:shadow-2xl hover:shadow-helium-pink/5">
         {/* Thumbnail */}
         <div
-          className="relative aspect-video w-full cursor-pointer overflow-hidden rounded-t-xl bg-[#111]"
+          className="relative aspect-video w-full cursor-pointer overflow-hidden rounded-t-xl bg-[#111] shrink-0"
           onClick={() => setVideoOpen(true)}
         >
           <video
@@ -39,9 +39,9 @@ export default function VideoCard({ video }: VideoCardProps) {
           </video>
 
           <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 group-hover:bg-black/20">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-helium-yellow shadow-lg shadow-helium-yellow/20 transition-transform duration-300 group-hover:scale-110">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-helium-yellow shadow-lg shadow-helium-yellow/20 transition-transform duration-300 group-hover:scale-110">
               <svg
-                className="ml-0.5 h-5 w-5 text-[#212121]"
+                className="ml-0.5 h-6 w-6 text-[#212121]"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -52,33 +52,39 @@ export default function VideoCard({ video }: VideoCardProps) {
           </div>
         </div>
 
-        <CardHeader className="pb-0">
-          <CardTitle className="text-sm font-semibold text-helium-cream">
+        {/* Title — fixed height so all cards align */}
+        <CardHeader className="pb-1 shrink-0">
+          <CardTitle className="text-base font-bold text-helium-cream min-h-[2.5rem] flex items-start">
             {video.title}
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="pt-0">
-          <div className="rounded-lg bg-[#161616] p-2.5 font-mono text-[11px] leading-relaxed">
-            <span className="font-semibold text-helium-pink">Prompt: </span>
-            <span className="text-helium-cream/50 whitespace-pre-line line-clamp-3">
-              {video.prompt}
-            </span>
+        {/* Prompt area — fixed height with overflow hidden */}
+        <CardContent className="pt-0 flex-1 flex flex-col">
+          <div className="rounded-lg bg-[#161616] p-3 flex-1 flex flex-col">
+            <p className="text-xs font-semibold text-helium-pink mb-1.5 shrink-0">Prompt:</p>
+            <p className="text-sm leading-relaxed text-helium-cream/70 overflow-hidden flex-1 max-h-[3.9rem]" style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical" }}>
+              {video.prompt.replace(/\n+/g, " ")}
+            </p>
             <button
               onClick={() => setPromptOpen(true)}
-              className="mt-1 block text-[10px] font-semibold text-helium-blue hover:text-helium-blue/80 transition-colors"
+              className="mt-2 inline-flex items-center gap-1 self-start rounded-md bg-helium-blue/10 px-3 py-1 text-xs font-semibold text-helium-blue transition-colors hover:bg-helium-blue/20 shrink-0 cursor-pointer"
             >
               View more
+              <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
         </CardContent>
 
-        <CardFooter className="border-t-white/5 bg-transparent gap-1.5">
+        {/* Badges — always at bottom */}
+        <CardFooter className="bg-transparent gap-2 border-t-0 border-none shrink-0 mt-auto">
           {video.badges.map((badge) => (
             <Badge
               key={badge}
               variant="outline"
-              className="border-white/10 bg-white/5 text-[10px] text-helium-cream/70"
+              className="border-white/10 bg-white/5 text-xs text-helium-cream/70"
             >
               {badge}
             </Badge>

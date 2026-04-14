@@ -15,11 +15,9 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="py-12 text-center">
-          <p className="text-sm text-helium-cream/50">
-            Built with{" "}
-            <span className="gradient-text font-semibold">Helium AI</span>{" "}
-            — orchestrating intelligence, one workflow at a time.
+        <footer className="py-4 text-center">
+          <p className="text-xs text-helium-cream/40">
+            Built with Helium AI — orchestrating intelligence, one workflow at a time.
           </p>
         </footer>
       </div>

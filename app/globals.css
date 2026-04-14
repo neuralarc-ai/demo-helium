@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Fustat:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -56,9 +57,9 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: "Fustat", system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  --font-heading: "Lora", serif;
 
   --color-helium-pink: var(--helium-pink);
   --color-helium-blue: var(--helium-blue);
@@ -102,7 +103,7 @@
 
 body {
   background: var(--helium-bg);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: "Fustat", system-ui, -apple-system, sans-serif;
 }
 
 .gradient-text {
@@ -126,4 +127,47 @@ html {
   html {
     @apply font-sans;
   }
+}
+
+/* ── Hero Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(255, 192, 203, 0.3), 0 0 60px rgba(255, 192, 203, 0.1); }
+  50% { text-shadow: 0 0 30px rgba(255, 192, 203, 0.5), 0 0 80px rgba(255, 192, 203, 0.2); }
+}
+
+@keyframes gradientMove {
+  0% { transform: translate(-10%, -10%) scale(1); }
+  50% { transform: translate(10%, 10%) scale(1.2); }
+  100% { transform: translate(-10%, -10%) scale(1); }
+}
+
+@keyframes gradientMoveReverse {
+  0% { transform: translate(10%, 10%) scale(1.1); }
+  50% { transform: translate(-10%, -5%) scale(1); }
+  100% { transform: translate(10%, 10%) scale(1.1); }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--helium-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(135, 206, 235, 0.3);
+  border-radius: 3px;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
 }

@@ -42,7 +42,7 @@ export default function CategorySection({ category }: CategorySectionProps) {
         </Badge>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-4 items-stretch">
         {category.videos.map((video, i) => (
           <div
             key={video.id}

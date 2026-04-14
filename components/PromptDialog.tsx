@@ -31,33 +31,35 @@ export default function PromptDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-[#161616] border-white/10 gap-3">
-        <DialogHeader>
-          <DialogTitle className="text-helium-cream text-sm">
-            {title} — Prompt
-          </DialogTitle>
+      <DialogContent className="sm:max-w-2xl h-[60vh] flex flex-col">
+        <DialogHeader className="shrink-0">
+          <div className="flex items-center gap-2">
+            <DialogTitle>{title} — Prompt</DialogTitle>
+            <div className="relative">
+              <button
+                onClick={copy}
+                className="rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground hover:bg-muted cursor-pointer"
+                aria-label="Copy prompt"
+              >
+                {copied ? (
+                  <svg className="h-4 w-4 text-helium-pink" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                ) : (
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" /></svg>
+                )}
+              </button>
+              {copied && (
+                <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-muted px-2 py-0.5 text-[10px] text-helium-pink">
+                  Copied!
+                </span>
+              )}
+            </div>
+          </div>
         </DialogHeader>
-
-        <div className="max-h-80 overflow-y-auto rounded-lg bg-[#111] p-3 font-mono text-xs leading-relaxed text-helium-cream/60 whitespace-pre-line">
-          {prompt}
+        <div className="flex-1 overflow-y-auto -mx-4 px-4">
+          <p className="text-sm leading-relaxed text-foreground/80 whitespace-pre-line">
+            {prompt}
+          </p>
         </div>
-
-        <button
-          onClick={copy}
-          className="inline-flex items-center gap-1.5 self-end rounded-full bg-helium-pink/15 px-4 py-1.5 text-xs font-semibold text-helium-pink transition-all hover:bg-helium-pink/25"
-        >
-          {copied ? (
-            <>
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-              Copied
-            </>
-          ) : (
-            <>
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" /></svg>
-              Copy Prompt
-            </>
-          )}
-        </button>
       </DialogContent>
     </Dialog>
   );
